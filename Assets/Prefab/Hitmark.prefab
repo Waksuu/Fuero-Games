@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4828cfd67115bb428117ef1e1d94ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitmarkAudio: {fileID: 8300000, guid: c09bf3a435cc23e4cb1fcc093a5efd96, type: 3}
+  Audio: {fileID: 8300000, guid: c09bf3a435cc23e4cb1fcc093a5efd96, type: 3}
   AudioVolume: 0.6
 --- !u!82 &6522759481838211451
 AudioSource:
