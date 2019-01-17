@@ -11,5 +11,5 @@ public class PlayHitmarkSound : MonoBehaviour
         PlaySound();
     }
 
-    private void PlaySound() => soundHandler.PlaySound(soundHandler.AudioSource, soundHandler.Audio, soundHandler.audioVolume);
+    public void PlaySound() => soundHandler.PlaySound(soundHandler.AudioSource, soundHandler.Audio, soundHandler.AudioVolume);
 }

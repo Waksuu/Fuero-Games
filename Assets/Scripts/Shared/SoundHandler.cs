@@ -7,8 +7,7 @@ public class SoundHandler : MonoBehaviour
     public AudioSource AudioSource;
 
     [Range(0f, 1f)]
-    [SerializeField]
-    private float audioVolume = 0.6f;
+    public float AudioVolume = 0.6f;
 
     public void PlaySound(AudioSource audioSource, AudioClip audio, float audioVolume) => audioSource.PlayOneShot(audio, audioVolume);
 }
