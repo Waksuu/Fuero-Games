@@ -3,9 +3,11 @@
 public class DisplayHitmark : MonoBehaviour
 {
     public GameObject HitmarkPrefab;
-    public float DisappearDelay = 0.25f;
 
-    private void OnTriggerEnter2D(Collider2D collision) => QuciklyDisplayHitmark(HitmarkPrefab, DisappearDelay);
+    [SerializeField]
+    private float disappearDelay = 0.25f;
+
+    private void OnTriggerEnter2D(Collider2D collision) => QuciklyDisplayHitmark(HitmarkPrefab, disappearDelay);
 
     private void QuciklyDisplayHitmark(GameObject hitmarkPrefab, float disappearDelay)
     {

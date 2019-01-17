@@ -3,13 +3,13 @@
 [RequireComponent(typeof(SoundHandler))]
 public class PlayHitmarkSound : MonoBehaviour
 {
-    private SoundHandler _soundHandler;
+    private SoundHandler soundHandler;
 
     private void Start()
     {
-        _soundHandler = gameObject.GetComponent<SoundHandler>();
+        soundHandler = gameObject.GetComponent<SoundHandler>();
         PlaySound();
     }
 
-    private void PlaySound() => _soundHandler.PlaySound(_soundHandler.AudioSource, _soundHandler.Audio, _soundHandler.AudioVolume);
+    private void PlaySound() => soundHandler.PlaySound(soundHandler.AudioSource, soundHandler.Audio, soundHandler.audioVolume);
 }

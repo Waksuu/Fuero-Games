@@ -2,9 +2,9 @@
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform myTarget;
+    public Transform MyTarget;
 
-    private void Update() => SetCameraAtTargetPosition(myTarget);
+    private void Update() => SetCameraAtTargetPosition(MyTarget);
 
     private void SetCameraAtTargetPosition(Transform myTarget)
     {

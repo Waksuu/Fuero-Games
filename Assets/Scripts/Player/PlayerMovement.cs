@@ -7,22 +7,22 @@ public class PlayerMovement : MonoBehaviour
     private const string _horizontalAxis = "Horizontal";
 
     [Range(0f, 10f)]
-    public float SpeedScale = 4f;
+    private float speedScale = 4f;
 
     [Range(0f, 400f)]
-    public float RotationScale = 180f;
+    private float rotationScale = 180f;
 
     private void Update()
     {
         var playerVerticalSpeed = Input.GetAxis(_verticalAxis);
         var playerRotationSpeed = Input.GetAxis(_horizontalAxis);
 
-        var playerRotation = GetPlayerRotation(RotationScale, playerRotationSpeed);
+        var playerRotation = GetPlayerRotation(rotationScale, playerRotationSpeed);
         RotatePlayer(playerRotation);
 
         if (PlayerMovesForward(playerVerticalSpeed))
         {
-            MovePlayerForward(SpeedScale, playerVerticalSpeed, playerRotation);
+            MovePlayerForward(speedScale, playerVerticalSpeed, playerRotation);
         }
     }
 

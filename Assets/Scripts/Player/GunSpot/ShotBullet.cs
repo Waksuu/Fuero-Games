@@ -6,12 +6,13 @@ public class ShotBullet : MonoBehaviour
     public GameObject BulletPrefab;
 
     [Range(0f, 1.5f)]
-    public float FireDelay = 0.5f;
+    [SerializeField]
+    private float fireDelay = 0.5f;
 
-    private float _cooldownTimer = 0.5f;
-    private SoundHandler _soundHandler;
+    private float cooldownTimer = 0.5f;
+    private SoundHandler soundHandler;
 
-    private void Start() => _soundHandler = gameObject.GetComponent<SoundHandler>();
+    private void Start() => soundHandler = gameObject.GetComponent<SoundHandler>();
 
     private void Update()
     {
@@ -27,13 +28,13 @@ public class ShotBullet : MonoBehaviour
         }
     }
 
-    private void DecreaseCooldown() => _cooldownTimer -= Time.deltaTime;
+    private void DecreaseCooldown() => cooldownTimer -= Time.deltaTime;
 
-    private void SetCooldown() => _cooldownTimer = FireDelay;
+    private void SetCooldown() => cooldownTimer = fireDelay;
 
-    private void PlayAudio() => _soundHandler.PlaySound(_soundHandler.AudioSource, _soundHandler.Audio, _soundHandler.AudioVolume);
+    private void PlayAudio() => soundHandler.PlaySound(soundHandler.AudioSource, soundHandler.Audio, soundHandler.audioVolume);
 
     private void CreateBullet() => Instantiate(BulletPrefab, transform.position, transform.rotation);
 
-    private bool CooldownEnded() => _cooldownTimer <= 0;
+    private bool CooldownEnded() => cooldownTimer <= 0;
 }

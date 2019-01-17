@@ -3,9 +3,10 @@
 public class MoveBullet : MonoBehaviour
 {
     [Range(0f, 10f)]
-    public float SpeedScale = 4f;
+    [SerializeField]
+    private float speedScale = 4f;
 
-    private void Update() => MoveBulletForward(SpeedScale);
+    private void Update() => MoveBulletForward(speedScale);
 
     private void MoveBulletForward(float speedScale)
     {
