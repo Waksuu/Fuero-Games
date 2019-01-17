@@ -9,11 +9,11 @@ public class ShotBullet : MonoBehaviour
     public float FireDelay = 0.5f;
 
     private float _cooldownTimer = 0.5f;
-    private SoundHandler soundHandler;
+    private SoundHandler _soundHandler;
 
     private void Start()
     {
-        soundHandler = gameObject.GetComponent<SoundHandler>();
+        _soundHandler = gameObject.GetComponent<SoundHandler>();
     }
 
     private void Update()
@@ -34,7 +34,7 @@ public class ShotBullet : MonoBehaviour
 
     private void SetCooldown() => _cooldownTimer = FireDelay;
 
-    private void PlayAudio() => soundHandler.PlaySound(soundHandler.audioSource, soundHandler.Audio, soundHandler.AudioVolume);
+    private void PlayAudio() => _soundHandler.PlaySound(_soundHandler.AudioSource, _soundHandler.Audio, _soundHandler.AudioVolume);
 
     private void CreateBullet() => Instantiate(BulletPrefab, transform.position, transform.rotation);
 

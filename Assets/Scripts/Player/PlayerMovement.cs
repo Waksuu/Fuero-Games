@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 10f)]
     public float SpeedScale = 4f;
 
-    [Range(0f, 360f)]
+    [Range(0f, 400f)]
     public float RotationScale = 180f;
 
     private void Update()

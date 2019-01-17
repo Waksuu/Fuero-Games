@@ -6,12 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(SoundHandler))]
 public class PlayHitmarkSound : MonoBehaviour
 {
-    private SoundHandler soundHandler;
+    private SoundHandler _soundHandler;
 
     void Start()
     {
-        soundHandler = gameObject.GetComponent<SoundHandler>();
-        soundHandler.PlaySound(soundHandler.audioSource, soundHandler.Audio, soundHandler.AudioVolume);
+        _soundHandler = gameObject.GetComponent<SoundHandler>();
+        PlaySound();
     }
 
+    private void PlaySound() => _soundHandler.PlaySound(_soundHandler.AudioSource, _soundHandler.Audio, _soundHandler.AudioVolume);
 }

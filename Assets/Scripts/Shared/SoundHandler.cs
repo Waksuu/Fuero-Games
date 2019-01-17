@@ -9,7 +9,7 @@ public class SoundHandler : MonoBehaviour
     [Range(0f, 1f)]
     public float AudioVolume = 0.6f;
 
-    public AudioSource audioSource;
+    public AudioSource AudioSource;
 
     public void PlaySound(AudioSource audioSource, AudioClip audio, float audioVolume)
     {
