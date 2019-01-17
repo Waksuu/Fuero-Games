@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MoveBullet : MonoBehaviour
+public class BulletMovement : MonoBehaviour
 {
     [Range(0f, 10f)]
     [SerializeField]
