@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SoundHandler))]
 public class PlayHitmarkSound : MonoBehaviour
 {
     private SoundHandler _soundHandler;
 
-    void Start()
+    private void Start()
     {
         _soundHandler = gameObject.GetComponent<SoundHandler>();
         PlaySound();

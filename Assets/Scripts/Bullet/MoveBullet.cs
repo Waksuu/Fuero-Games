@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoveBullet : MonoBehaviour
 {
     [Range(0f, 10f)]
     public float SpeedScale = 4f;
 
-    void Update()
-    {
-        MoveBulletForward(SpeedScale);
-    }
+    private void Update() => MoveBulletForward(SpeedScale);
 
     private void MoveBulletForward(float speedScale)
     {
@@ -22,6 +17,6 @@ public class MoveBullet : MonoBehaviour
         position += transform.rotation * velocity;
         transform.position = position;
     }
-    private float CaculateBulletPosition(float speedScale) => speedScale * Time.deltaTime;
 
+    private float CaculateBulletPosition(float speedScale) => speedScale * Time.deltaTime;
 }

@@ -2,16 +2,21 @@
 
 public class SpawnAsteroids : MonoBehaviour
 {
-    public int GridWidth = 4;
-    public int GridHeight = 4;
     public Grid Grid;
+
     public GameObject Asteroid;
+
+    [SerializeField]
+    private int gridWidth = 4;
+
+    [SerializeField]
+    private int gridHeight = 4;
 
     private void Start()
     {
-        for (int x = GridWidth / -2; x < GridWidth / 2; x++)
+        for (int x = gridWidth / -2; x < gridWidth / 2; x++)
         {
-            for (int y = GridHeight / -2; y < GridHeight / 2; y++)
+            for (int y = gridHeight / -2; y < gridHeight / 2; y++)
             {
                 Vector3Int cellPosition = GetCellPosition(x, y);
                 Vector3 centerPosition = GetCenterPosition(cellPosition);

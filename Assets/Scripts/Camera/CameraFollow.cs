@@ -4,11 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform myTarget;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        SetCameraAtTargetPosition(myTarget);
-    }
+    private void Update() => SetCameraAtTargetPosition(myTarget);
 
     private void SetCameraAtTargetPosition(Transform myTarget)
     {
@@ -18,6 +14,5 @@ public class CameraFollow : MonoBehaviour
             targetPosition.z = transform.position.z;
             transform.position = targetPosition;
         }
-
     }
 }

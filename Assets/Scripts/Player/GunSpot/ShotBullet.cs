@@ -11,10 +11,7 @@ public class ShotBullet : MonoBehaviour
     private float _cooldownTimer = 0.5f;
     private SoundHandler _soundHandler;
 
-    private void Start()
-    {
-        _soundHandler = gameObject.GetComponent<SoundHandler>();
-    }
+    private void Start() => _soundHandler = gameObject.GetComponent<SoundHandler>();
 
     private void Update()
     {
