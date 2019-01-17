@@ -1,23 +1,42 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(SoundHandler))]
 public class ShotBullet : MonoBehaviour
 {
     public GameObject BulletPrefab;
 
     [Range(0f, 1.5f)]
     public float FireDelay = 0.5f;
+
     private float _cooldownTimer = 0.5f;
+    private SoundHandler soundHandler;
+
+    private void Start()
+    {
+        soundHandler = gameObject.GetComponent<SoundHandler>();
+    }
 
     private void Update()
     {
-        _cooldownTimer -= Time.deltaTime;
-
         if (CooldownEnded())
         {
-            Instantiate(BulletPrefab, transform.position, transform.rotation);
-            _cooldownTimer = FireDelay;
+            CreateBullet();
+            PlayAudio();
+            SetCooldown();
+        }
+        else
+        {
+            DecreaseCooldown();
         }
     }
+
+    private void DecreaseCooldown() => _cooldownTimer -= Time.deltaTime;
+
+    private void SetCooldown() => _cooldownTimer = FireDelay;
+
+    private void PlayAudio() => soundHandler.PlaySound(soundHandler.audioSource, soundHandler.Audio, soundHandler.AudioVolume);
+
+    private void CreateBullet() => Instantiate(BulletPrefab, transform.position, transform.rotation);
 
     private bool CooldownEnded() => _cooldownTimer <= 0;
 }

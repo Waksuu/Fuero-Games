@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1869809345213346386}
   - component: {fileID: 6541361295502959674}
-  - component: {fileID: 6607000270828265599}
-  - component: {fileID: 6522759481838211451}
+  - component: {fileID: 7972795497131468442}
+  - component: {fileID: 3666027347601576848}
+  - component: {fileID: 4049022012098169787}
   m_Layer: 0
   m_Name: Hitmark
   m_TagString: Untagged
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6607000270828265599
+--- !u!114 &7972795497131468442
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,12 +91,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9070117198357009225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4828cfd67115bb428117ef1e1d94ae2, type: 3}
+  m_Script: {fileID: 11500000, guid: bca5ad6f4632bbf4aa67b8b307d2a4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Audio: {fileID: 8300000, guid: c09bf3a435cc23e4cb1fcc093a5efd96, type: 3}
-  AudioVolume: 0.6
---- !u!82 &6522759481838211451
+--- !u!82 &3666027347601576848
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,3 +190,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4049022012098169787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9070117198357009225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4828cfd67115bb428117ef1e1d94ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Audio: {fileID: 8300000, guid: c09bf3a435cc23e4cb1fcc093a5efd96, type: 3}
+  AudioVolume: 0.6
+  audioSource: {fileID: 3666027347601576848}
