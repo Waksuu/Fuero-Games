@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 400f)]
     private float rotationScale = 180f;
 
-    private void Update()
+    private void FixedUpdate()
     {
         var playerVerticalSpeed = Input.GetAxis(_verticalAxis);
         var playerRotationSpeed = Input.GetAxis(_horizontalAxis);
@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         return rotation;
     }
 
-    private float CaculatePlayerRotation(float rotationScale, float playerRotationSpeed) => rotationScale * playerRotationSpeed * Time.deltaTime;
+    private float CaculatePlayerRotation(float rotationScale, float playerRotationSpeed) => rotationScale * playerRotationSpeed * Time.fixedDeltaTime;
 
     private void RotatePlayer(Quaternion playerRotation) => transform.rotation = playerRotation;
 
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = position;
     }
 
-    private float CaculatePlayerPosition(float speedScale, float playerVerticalSpeed) => speedScale * playerVerticalSpeed * Time.deltaTime;
+    private float CaculatePlayerPosition(float speedScale, float playerVerticalSpeed) => speedScale * playerVerticalSpeed * Time.fixedDeltaTime;
 
     #endregion VerticalMovement
 }

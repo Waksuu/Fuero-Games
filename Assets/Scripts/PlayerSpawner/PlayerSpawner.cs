@@ -32,7 +32,7 @@ public class PlayerSpawner : MonoBehaviour
     private GameObject SpawnPlayer()
     {
         _respawnTimer = respawnTimer;
-        return playerInstance = Instantiate(PlayerPrefab, transform.position, transform.rotation);
+        return Instantiate(PlayerPrefab, transform.position, transform.rotation);
     }
 
     private bool PlayerExists() => playerInstance != null;

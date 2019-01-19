@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 144381499}
   - component: {fileID: 144381498}
-  - component: {fileID: 144381500}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -157,23 +156,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &144381500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144381497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a659218c494eff040961707b9868a7e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Grid: {fileID: 144381498}
-  Asteroid: {fileID: 8010553388576592305, guid: 5493ca8fb08399348adc606af2309cb3,
-    type: 3}
-  gridWidth: 16
-  gridHeight: 16
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec7c8bbe8a058a4eac86f111972ce47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyTarget: {fileID: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -281,6 +262,7 @@ GameObject:
   - component: {fileID: 1222455536}
   - component: {fileID: 1222455538}
   - component: {fileID: 1222455537}
+  - component: {fileID: 1222455539}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -384,6 +366,23 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1222455539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222455535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a659218c494eff040961707b9868a7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tilemap: {fileID: 1222455538}
+  Asteroid: {fileID: 8010553388576592305, guid: 5493ca8fb08399348adc606af2309cb3,
+    type: 3}
+  gridWidth: 512
+  gridHeight: 512
 --- !u!1 &1735722168
 GameObject:
   m_ObjectHideFlags: 0

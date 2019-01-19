@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3445cc4d992be214586423d0b8452c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedScale: 5
+  speedScale: 4
 --- !u!114 &4521430545558156541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d02b529cd079444fb7f7a3b2b79d46e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelfDestructTimer: 3
+  selfDestructTimer: 3
 --- !u!114 &6059192938130357753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112deafef201a2246b84b901b3fe4225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitmarkPrefab: {fileID: 9070117198357009225, guid: 68d7adddd34e7e246b21354b2389dd69,
+  hitmarkPrefab: {fileID: 9070117198357009225, guid: 68d7adddd34e7e246b21354b2389dd69,
     type: 3}
-  DisappearDelay: 0.25
+  disappearDelay: 0.25
