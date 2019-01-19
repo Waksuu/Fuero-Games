@@ -8,8 +8,8 @@ public class PlayHitmarkSound : MonoBehaviour
     private void Start()
     {
         soundHandler = gameObject.GetComponent<SoundHandler>();
-        PlaySound();
+        PlaySound(soundHandler);
     }
 
-    public void PlaySound() => soundHandler.PlaySound(soundHandler.AudioSource, soundHandler.Audio, soundHandler.AudioVolume);
+    public void PlaySound(SoundHandler soundHandler) => soundHandler.PlaySound(soundHandler.AudioSource, soundHandler.Audio, soundHandler.AudioVolume);
 }

@@ -10,20 +10,17 @@ public class PlayerSpawner : MonoBehaviour
 
     private GameObject playerInstance;
 
-    private void Start()
-    {
-        playerInstance = SpawnPlayer();
-    }
+    private void Start() => playerInstance = SpawnPlayer();
 
     private void Update()
     {
-        if (PlayerExists())
+        if (PlayerExists(playerInstance))
         {
             return;
         }
 
-        DecreaseRespawnTimer();
-        if (RespawnIsReady())
+        DecreaseRespawnTimer(ref _respawnTimer);
+        if (RespawnIsReady(_respawnTimer))
         {
             playerInstance = SpawnPlayer();
         }
@@ -35,9 +32,9 @@ public class PlayerSpawner : MonoBehaviour
         return Instantiate(PlayerPrefab, transform.position, transform.rotation);
     }
 
-    private bool PlayerExists() => playerInstance != null;
+    private bool PlayerExists(GameObject playerInstance) => playerInstance != null;
 
-    private void DecreaseRespawnTimer() => _respawnTimer -= Time.deltaTime;
+    private void DecreaseRespawnTimer(ref float _respawnTimer) => _respawnTimer -= Time.deltaTime;
 
-    private bool RespawnIsReady() => _respawnTimer <= 0;
+    private bool RespawnIsReady(float _respawnTimer) => _respawnTimer <= 0;
 }
