@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
+#pragma warning disable 0649
+
 public class SpawnAsteroids : MonoBehaviour
 {
     [SerializeField]

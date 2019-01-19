@@ -2,22 +2,14 @@
 
 public class BulletMovement : MonoBehaviour
 {
-    [Range(0f, 10f)]
     [SerializeField]
-    private float speedScale = 4f;
-
-    private void Update() => MoveBulletForward(speedScale);
-
-    private void MoveBulletForward(float speedScale)
+    [Range(0f, 150f)]
+    private float speed = 90f;
+    private void Start()
     {
-        Vector3 position = transform.position;
-
-        var bulletPosition = CaculateBulletPosition(speedScale);
-        Vector3 velocity = new Vector3(0, bulletPosition, 0);
-
-        position += transform.rotation * velocity;
-        transform.position = position;
+        Rigidbody2D bulletBody2D = GetComponent<Rigidbody2D>();
+        SetBulletInMotion(bulletBody2D, speed);
     }
 
-    private float CaculateBulletPosition(float speedScale) => speedScale * Time.deltaTime;
+    private void SetBulletInMotion(Rigidbody2D bulletBody2D, float speed) => bulletBody2D.AddForce(transform.up * speed);
 }
