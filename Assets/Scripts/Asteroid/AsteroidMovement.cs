@@ -4,15 +4,13 @@ public class AsteroidMovement : MonoBehaviour
 {
     private float randomSpeed;
 
-    private void Awake() => randomSpeed = GenerateRandomSpeed();
+    private void Awake() => randomSpeed = Random.Range(10f, 100f);
 
     private void Start()
     {
         Rigidbody2D asteroidBody = GetComponent<Rigidbody2D>();
-        SetAsteroidInMontion(asteroidBody, randomSpeed);
+
+        //Set asteroid in motion
+        asteroidBody.AddForce(transform.up * randomSpeed);
     }
-
-    private float GenerateRandomSpeed() => Random.Range(10f, 100f);
-
-    private void SetAsteroidInMontion(Rigidbody2D asteroidBody, float randomSpeed) => asteroidBody.AddForce(transform.up * randomSpeed);
 }
