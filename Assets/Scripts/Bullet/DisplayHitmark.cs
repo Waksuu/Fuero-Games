@@ -10,7 +10,17 @@ public class DisplayHitmark : MonoBehaviour
     [SerializeField]
     private float disappearDelay = 0.25f;
 
-    private void OnTriggerEnter2D(Collider2D collision) => QuciklyDisplayHitmark(hitmarkPrefab, disappearDelay);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        AddScore();
+        QuciklyDisplayHitmark(hitmarkPrefab, disappearDelay);
+    }
+
+    private void AddScore()
+    {
+        ScoreManager.Score += 10;
+        ScoreManager.UpdateScore = true;
+    }
 
     private void QuciklyDisplayHitmark(GameObject hitmarkPrefab, float disappearDelay)
     {
