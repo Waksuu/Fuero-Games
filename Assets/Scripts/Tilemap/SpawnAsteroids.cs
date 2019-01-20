@@ -12,10 +12,10 @@ public class SpawnAsteroids : MonoBehaviour
     private GameObject asteroid;
 
     [SerializeField]
-    private int gridWidth = 4;
+    private int gridWidth = 160;
 
     [SerializeField]
-    private int gridHeight = 4;
+    private int gridHeight = 160;
 
     [SerializeField]
     private int seed = 1;

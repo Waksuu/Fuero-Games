@@ -378,11 +378,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a659218c494eff040961707b9868a7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tilemap: {fileID: 1222455538}
-  Asteroid: {fileID: 8010553388576592305, guid: 5493ca8fb08399348adc606af2309cb3,
+  tilemap: {fileID: 1222455538}
+  asteroid: {fileID: 8010553388576592305, guid: 5493ca8fb08399348adc606af2309cb3,
     type: 3}
-  gridWidth: 512
-  gridHeight: 512
+  gridWidth: 160
+  gridHeight: 160
+  seed: 1
 --- !u!1 &1735722168
 GameObject:
   m_ObjectHideFlags: 0
