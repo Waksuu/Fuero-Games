@@ -20,7 +20,11 @@ public class PlayerDeathGizmos : MonoBehaviour
 
     private void Awake()
     {
-        SetVideoClip();
+        if (videoPlayer != null)
+        {
+            SetVideoClip();
+        }
+
         ToggleButton(false);
     }
 
@@ -38,7 +42,12 @@ public class PlayerDeathGizmos : MonoBehaviour
     private void OnDestroy()
     {
         PauseGame(true);
-        PlayClip();
+
+        if (videoPlayer != null)
+        {
+            PlayClip();
+        }
+
         ToggleButton(true);
     }
 
