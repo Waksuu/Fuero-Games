@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 0649
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,10 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    [System.NonSerialized]
+    [NonSerialized]
     public static float Score;
 
-    [System.NonSerialized]
+    [NonSerialized]
     public static bool UpdateScore = false;
 
     [SerializeField]
