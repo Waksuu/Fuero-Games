@@ -9,5 +9,5 @@ public class SoundHandler : MonoBehaviour
     [Range(0f, 1f)]
     public float AudioVolume = 0.6f;
 
-    public void PlaySound(AudioSource audioSource, AudioClip audio, float audioVolume) => audioSource.PlayOneShot(audio, audioVolume);
+    public void PlaySound() => AudioSource.PlayOneShot(Audio, AudioVolume);
 }

@@ -35,7 +35,7 @@ public class ShotBullet : MonoBehaviour
 
     private void CreateBullet(GameObject bulletPrefab) => Instantiate(bulletPrefab, transform.position, transform.rotation);
 
-    private void PlayAudio(SoundHandler soundHandler) => soundHandler.PlaySound(soundHandler.AudioSource, soundHandler.Audio, soundHandler.AudioVolume);
+    private void PlayAudio(SoundHandler soundHandler) => soundHandler.PlaySound();
 
     private void SetCooldown(ref float cooldownTimer, float fireDelay) => cooldownTimer = fireDelay;
 

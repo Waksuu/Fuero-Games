@@ -12,10 +12,10 @@ public class SpawnAsteroids : MonoBehaviour
     private GameObject asteroid;
 
     [SerializeField]
-    private int gridWidth = 160;
+    private int width = 160;
 
     [SerializeField]
-    private int gridHeight = 160;
+    private int height = 160;
 
     [SerializeField]
     private int seed = 1;
@@ -23,16 +23,16 @@ public class SpawnAsteroids : MonoBehaviour
     private void Start()
     {
         InitializeGameWithSeed(seed);
-        GenerateAsteroidsOnTilemap(gridWidth, gridHeight, tilemap, asteroid);
+        GenerateAsteroidsOnTilemap(width, height, tilemap, asteroid);
     }
 
     private void InitializeGameWithSeed(int seed) => Random.InitState(seed);
 
-    private void GenerateAsteroidsOnTilemap(int gridWidth, int gridHeight, Tilemap tilemap, GameObject asteroid)
+    private void GenerateAsteroidsOnTilemap(int width, int height, Tilemap tilemap, GameObject asteroid)
     {
-        for (int x = gridWidth / -2; x < gridWidth / 2; x++)
+        for (int x = width / -2; x < width / 2; x++)
         {
-            for (int y = gridHeight / -2; y < gridHeight / 2; y++)
+            for (int y = height / -2; y < height / 2; y++)
             {
                 Vector3Int cellPosition = GetCellPosition(x, y);
                 Vector3 centerPosition = GetCenterPosition(tilemap, cellPosition);

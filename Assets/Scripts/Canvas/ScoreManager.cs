@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +20,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
+        //I wanted to add an Observer but it doesn't work quit well with subscribing and unsubscribing from every bullet.
         if (UpdateScore) 
         {
             scoreText.text = uiText + Score;
