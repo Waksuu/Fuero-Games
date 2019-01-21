@@ -20,8 +20,8 @@ public class PlayerDeathGizmos : MonoBehaviour
 
     private void Awake()
     {
-        SetVideoClip();
-        ToggleButton(false);
+        SetVideoClip(videoPlayer, videoClip);
+        ToggleButton(restartButton, false);
     }
 
     private void Start()
@@ -38,11 +38,11 @@ public class PlayerDeathGizmos : MonoBehaviour
     private void OnDestroy()
     {
         PauseGame(true);
-        PlayClip();
-        ToggleButton(true);
+        PlayClip(videoPlayer);
+        ToggleButton(restartButton, true);
     }
 
-    private void SetVideoClip()
+    private void SetVideoClip(VideoPlayer videoPlayer, VideoClip videoClip)
     {
         if (videoPlayer != null)
         {
@@ -50,7 +50,7 @@ public class PlayerDeathGizmos : MonoBehaviour
         }
     }
 
-    private void ToggleButton(bool state)
+    private void ToggleButton(Button restartButton, bool state)
     {
         if (restartButton != null)
         {
@@ -60,7 +60,7 @@ public class PlayerDeathGizmos : MonoBehaviour
 
     private void PauseGame(bool state) => Time.timeScale = state ? 0 : 1;
 
-    private void PlayClip()
+    private void PlayClip(VideoPlayer videoPlayer)
     {
         if (videoPlayer != null)
         {
