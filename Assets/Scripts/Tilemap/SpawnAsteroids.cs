@@ -47,5 +47,5 @@ public class SpawnAsteroids : MonoBehaviour
 
     private void CreateAsteroidInCellCenter(GameObject asteroid, Vector3 centerPosition) => Instantiate(asteroid, transform.position + centerPosition, CreateRandom2DRotation());
 
-    private Quaternion CreateRandom2DRotation() => Quaternion.Euler(0f, 0f, Random.Range(0.0f, 360.0f));
+    private Quaternion CreateRandom2DRotation() => Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
 }
