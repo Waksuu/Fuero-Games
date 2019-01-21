@@ -7,8 +7,6 @@ using UnityEngine.Video;
 
 public class PlayerDeathGizmos : MonoBehaviour
 {
-    private const string sceneName = "MainScene";
-
     [SerializeField]
     private VideoClip videoClip;
 

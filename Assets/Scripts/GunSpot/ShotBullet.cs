@@ -22,7 +22,7 @@ public class ShotBullet : MonoBehaviour
         if (CooldownEnded(cooldownTimer))
         {
             CreateBullet(bulletPrefab);
-            PlayAudio(soundHandler);
+            soundHandler.PlaySound();
             SetCooldown(ref cooldownTimer, fireDelay);
         }
         else
@@ -34,8 +34,6 @@ public class ShotBullet : MonoBehaviour
     private bool CooldownEnded(float cooldownTimer) => cooldownTimer <= 0;
 
     private void CreateBullet(GameObject bulletPrefab) => Instantiate(bulletPrefab, transform.position, transform.rotation);
-
-    private void PlayAudio(SoundHandler soundHandler) => soundHandler.PlaySound();
 
     private void SetCooldown(ref float cooldownTimer, float fireDelay) => cooldownTimer = fireDelay;
 
