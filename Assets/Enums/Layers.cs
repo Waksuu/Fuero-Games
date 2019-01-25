@@ -10,5 +10,6 @@ namespace Assets.Enums
     {
         Player = 8,
         Invulnerability = 10,
+        Camera = 11,
     }
 }
