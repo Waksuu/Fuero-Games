@@ -2,21 +2,21 @@
 
 public class AsteroidOcclusion : MonoBehaviour
 {
-    private Renderer renderer;
+    private Renderer objectRenderer;
 
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
-        renderer.enabled = false;
+        objectRenderer = GetComponent<Renderer>();
+        objectRenderer.enabled = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (renderer.enabled != true)
+        if (objectRenderer.enabled != true)
         {
-            renderer.enabled = true;
+            objectRenderer.enabled = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) => renderer.enabled = false;
+    private void OnTriggerExit2D(Collider2D collision) => objectRenderer.enabled = false;
 }
