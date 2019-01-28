@@ -80,6 +80,8 @@ public class SpawnAsteroids : MonoBehaviour
                 grid.Add((newCellX, newCellY), asteroidCoordinate);
             }
 
+            //It does not work as intended, also i would have to "cache" asteroids that are on screen 
+            ///and put them back into grid when they will be no longer visible
             if (cameraFoV.Contains(item.Value.NewPosition))
             {
                 Instantiate(asteroid, item.Value.NewPosition, item.Value.Rotation);
