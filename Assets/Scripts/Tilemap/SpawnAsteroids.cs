@@ -43,7 +43,7 @@ public class SpawnAsteroids : MonoBehaviour
     private void FixedUpdate()
     {
         var cameraPosition = Camera.main.gameObject.transform.position;
-        Rect rect = new Rect(cameraPosition - (cameraSize* 0.5f), cameraSize);
+        Rect cameraFoV = new Rect(cameraPosition - (cameraSize* 0.5f), cameraSize);
 
         // I know coping grid is super slow
         Dictionary<(int, int), AsteroidCoordinate> gridCopy = new Dictionary<(int, int), AsteroidCoordinate>(grid);
@@ -80,7 +80,7 @@ public class SpawnAsteroids : MonoBehaviour
                 grid.Add((newCellX, newCellY), asteroidCoordinate);
             }
 
-            if (rect.Contains(item.Value.NewPosition))
+            if (cameraFoV.Contains(item.Value.NewPosition))
             {
                 Instantiate(asteroid, item.Value.NewPosition, item.Value.Rotation);
                 grid.Remove((newCellX, newCellY));
