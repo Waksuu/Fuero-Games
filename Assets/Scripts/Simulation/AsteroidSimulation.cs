@@ -6,7 +6,7 @@ public class AsteroidSimulation : MonoBehaviour
 {
     private SpawnAsteroids spawnAsteroids;
 
-    private void Awake() => spawnAsteroids = SpawnAsteroids.Instance;
+    private void Start() => spawnAsteroids = SpawnAsteroids.Instance;
 
     private void FixedUpdate()
     {
