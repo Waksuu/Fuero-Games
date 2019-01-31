@@ -11,53 +11,53 @@ public class AsteroidSimulation : MonoBehaviour
     private void FixedUpdate()
     {
         Dictionary<(int, int), Asteroid> gridCopy = new Dictionary<(int, int), Asteroid>(spawnAsteroids.Grid);
-        foreach (var item in gridCopy)
+        foreach (var cell in gridCopy)
         {
-            UpdateCoordinates(item);
+            UpdateCoordinates(cell);
 
-            (int, int) topCellCoordinate = (item.Key.Item1, item.Key.Item2 + 1);
-            (int, int) topRightCellCoordinate = (item.Key.Item1 + 1, item.Key.Item2 + 1);
-            (int, int) rightCellCoordinate = (item.Key.Item1 + 1, item.Key.Item2);
-            (int, int) downRightCellCoordinate = (item.Key.Item1 + 1, item.Key.Item2 - 1);
-            (int, int) downCellCoordinate = (item.Key.Item1, item.Key.Item2 - 1);
-            (int, int) downLeftCellCoordinate = (item.Key.Item1 - 1, item.Key.Item2 - 1);
-            (int, int) leftCellCoordinate = (item.Key.Item1 - 1, item.Key.Item2);
-            (int, int) topLeftCellCoordinate = (item.Key.Item1 - 1, item.Key.Item2 + 1);
+            (int, int) topCellCoordinate = (cell.Key.Item1, cell.Key.Item2 + 1);
+            (int, int) topRightCellCoordinate = (cell.Key.Item1 + 1, cell.Key.Item2 + 1);
+            (int, int) rightCellCoordinate = (cell.Key.Item1 + 1, cell.Key.Item2);
+            (int, int) downRightCellCoordinate = (cell.Key.Item1 + 1, cell.Key.Item2 - 1);
+            (int, int) downCellCoordinate = (cell.Key.Item1, cell.Key.Item2 - 1);
+            (int, int) downLeftCellCoordinate = (cell.Key.Item1 - 1, cell.Key.Item2 - 1);
+            (int, int) leftCellCoordinate = (cell.Key.Item1 - 1, cell.Key.Item2);
+            (int, int) topLeftCellCoordinate = (cell.Key.Item1 - 1, cell.Key.Item2 + 1);
 
-            if (HandleCollison(item, topCellCoordinate) || HandleCollison(item, topRightCellCoordinate)
-                || HandleCollison(item, rightCellCoordinate) || HandleCollison(item, downRightCellCoordinate)
-                || HandleCollison(item, downCellCoordinate) || HandleCollison(item, downLeftCellCoordinate)
-                || HandleCollison(item, leftCellCoordinate) || HandleCollison(item, topLeftCellCoordinate))
+            if (HandleCollison(cell, topCellCoordinate) || HandleCollison(cell, topRightCellCoordinate)
+                || HandleCollison(cell, rightCellCoordinate) || HandleCollison(cell, downRightCellCoordinate)
+                || HandleCollison(cell, downCellCoordinate) || HandleCollison(cell, downLeftCellCoordinate)
+                || HandleCollison(cell, leftCellCoordinate) || HandleCollison(cell, topLeftCellCoordinate))
             {
                 continue;
             }
 
-            (int, int) newCell = (Mathf.FloorToInt(item.Value.NewPosition.x), Mathf.FloorToInt(item.Value.NewPosition.y));
+            (int, int) newCell = (Mathf.FloorToInt(cell.Value.NewPosition.x), Mathf.FloorToInt(cell.Value.NewPosition.y));
 
-            if (AsteroidChangedCell(item, newCell))
+            if (AsteroidChangedCell(cell.Key, newCell))
             {
-                MoveAsteroidToNewCell(item, newCell);
+                MoveAsteroidToNewCell(cell.Key, newCell);
             }
         }
     }
 
-    private void UpdateCoordinates(KeyValuePair<(int, int), Asteroid> item)
+    private void UpdateCoordinates(KeyValuePair<(int, int), Asteroid> cell)
     {
-        Vector3 position = item.Value.Position;
+        Vector3 position = cell.Value.Position;
 
-        Vector3 positionUpdate = item.Value.NewPosition;
+        Vector3 positionUpdate = cell.Value.NewPosition;
         Vector3 newPositionUpdate = positionUpdate * 2 - position;
 
-        spawnAsteroids.Grid[item.Key] = new Asteroid
+        spawnAsteroids.Grid[cell.Key] = new Asteroid
         {
             Position = positionUpdate,
             NewPosition = newPositionUpdate,
-            Radius = item.Value.Radius,
-            Rotation = item.Value.Rotation,
+            Radius = cell.Value.Radius,
+            Rotation = cell.Value.Rotation,
         };
     }
 
-    private bool HandleCollison(KeyValuePair<(int, int), Asteroid> item, (int, int) coordinate)
+    private bool HandleCollison(KeyValuePair<(int, int), Asteroid> cell, (int, int) coordinate)
     {
         if (CoordinateIsEmpty(coordinate))
         {
@@ -66,9 +66,9 @@ public class AsteroidSimulation : MonoBehaviour
 
         Asteroid neighbourAsteroid = spawnAsteroids.Grid[coordinate];
 
-        if (Collision(item.Value, neighbourAsteroid))
+        if (Collision(cell.Value, neighbourAsteroid))
         {
-            DestroyCollidedAsteroids(item, coordinate);
+            DestroyCollidedAsteroids(cell.Key, coordinate);
             return true;
         }
 
@@ -77,20 +77,20 @@ public class AsteroidSimulation : MonoBehaviour
 
     private bool CoordinateIsEmpty((int, int) coordinate) => !spawnAsteroids.Grid.ContainsKey(coordinate);
 
-    private bool Collision(Asteroid itemAsteroid, Asteroid gridAsteroid) => Mathf.Pow(gridAsteroid.Position.x - itemAsteroid.NewPosition.x, 2) + Mathf.Pow(gridAsteroid.Position.y - itemAsteroid.NewPosition.y, 2) <= Mathf.Pow(gridAsteroid.Radius + itemAsteroid.Radius, 2);
+    private bool Collision(Asteroid currentAsteroid, Asteroid neighbourAsteroid) => Mathf.Pow(neighbourAsteroid.Position.x - currentAsteroid.NewPosition.x, 2) + Mathf.Pow(neighbourAsteroid.Position.y - currentAsteroid.NewPosition.y, 2) <= Mathf.Pow(neighbourAsteroid.Radius + currentAsteroid.Radius, 2);
 
-    private void DestroyCollidedAsteroids(KeyValuePair<(int, int), Asteroid> item, (int, int) coordinate)
+    private void DestroyCollidedAsteroids((int, int) key, (int, int) coordinate)
     {
-        spawnAsteroids.Grid.Remove(item.Key);
+        spawnAsteroids.Grid.Remove(key);
         spawnAsteroids.Grid.Remove(coordinate);
     }
 
-    private bool AsteroidChangedCell(KeyValuePair<(int, int), Asteroid> item, (int, int) newCell) => item.Key != newCell;
+    private bool AsteroidChangedCell((int, int) cell, (int, int) newCell) => cell != newCell;
 
-    private void MoveAsteroidToNewCell(KeyValuePair<(int, int), Asteroid> item, (int, int) newCell)
+    private void MoveAsteroidToNewCell((int, int) cell, (int, int) newCell)
     {
-        Asteroid asteroidCoordinate = spawnAsteroids.Grid[item.Key];
-        spawnAsteroids.Grid.Remove(item.Key);
+        Asteroid asteroidCoordinate = spawnAsteroids.Grid[cell];
+        spawnAsteroids.Grid.Remove(cell);
         spawnAsteroids.Grid.Add(newCell, asteroidCoordinate);
     }
 }
