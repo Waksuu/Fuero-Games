@@ -84,6 +84,7 @@ public class SpawnAsteroids : MonoBehaviour
     private Vector3Int GetCellPosition(int x, int y) => new Vector3Int(x, y, 0);
 
     private Vector3 GetCenterPosition(Tilemap tilemap, Vector3Int cellPosition) => tilemap.GetCellCenterLocal(cellPosition);
+    private Quaternion CreateRandom2DRotation() => Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f));
 
     private Vector3 CreateAsteroidNewPosition(Vector3 position, Quaternion randomRotation)
     {
@@ -92,7 +93,6 @@ public class SpawnAsteroids : MonoBehaviour
         return position;
     }
 
-    private Quaternion CreateRandom2DRotation() => Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f));
 
     private float CreateRandomSpeed() => UnityEngine.Random.Range(minSpeed, maxSpeed);
 

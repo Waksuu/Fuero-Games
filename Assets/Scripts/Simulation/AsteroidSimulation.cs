@@ -32,14 +32,11 @@ public class AsteroidSimulation : MonoBehaviour
                 continue;
             }
 
-            var newCellX = Mathf.FloorToInt(item.Value.NewPosition.x);
-            var newCellY = Mathf.FloorToInt(item.Value.NewPosition.y);
+            (int, int) newCell = (Mathf.FloorToInt(item.Value.NewPosition.x), Mathf.FloorToInt(item.Value.NewPosition.y));
 
-            if (item.Key.Item1 != newCellX || item.Key.Item2 != newCellY)
+            if (AsteroidChangedCell(item, newCell))
             {
-                Asteroid asteroidCoordinate = spawnAsteroids.Grid[item.Key];
-                spawnAsteroids.Grid.Remove(item.Key);
-                spawnAsteroids.Grid.Add((newCellX, newCellY), asteroidCoordinate);
+                MoveAsteroidToNewCell(item, newCell);
             }
         }
     }
@@ -62,21 +59,38 @@ public class AsteroidSimulation : MonoBehaviour
 
     private bool HandleCollison(KeyValuePair<(int, int), Asteroid> item, (int, int) coordinate)
     {
-        if (!spawnAsteroids.Grid.ContainsKey(coordinate))
+        if (CoordinateIsEmpty(coordinate))
         {
             return false;
         }
 
-        Asteroid rightAsteroid = spawnAsteroids.Grid[coordinate];
+        Asteroid neighbourAsteroid = spawnAsteroids.Grid[coordinate];
 
-        if (Mathf.Pow(rightAsteroid.Position.x - item.Value.NewPosition.x, 2) + Mathf.Pow(rightAsteroid.Position.y - item.Value.NewPosition.y, 2)
-            <= Mathf.Pow(rightAsteroid.Radius + item.Value.Radius, 2))
+        if (Collision(item.Value, neighbourAsteroid))
         {
-            spawnAsteroids.Grid.Remove(item.Key);
-            spawnAsteroids.Grid.Remove(coordinate);
+            DestroyCollidedAsteroids(item, coordinate);
             return true;
         }
 
         return false;
+    }
+
+    private bool CoordinateIsEmpty((int, int) coordinate) => !spawnAsteroids.Grid.ContainsKey(coordinate);
+
+    private bool Collision(Asteroid itemAsteroid, Asteroid gridAsteroid) => Mathf.Pow(gridAsteroid.Position.x - itemAsteroid.NewPosition.x, 2) + Mathf.Pow(gridAsteroid.Position.y - itemAsteroid.NewPosition.y, 2) <= Mathf.Pow(gridAsteroid.Radius + itemAsteroid.Radius, 2);
+
+    private void DestroyCollidedAsteroids(KeyValuePair<(int, int), Asteroid> item, (int, int) coordinate)
+    {
+        spawnAsteroids.Grid.Remove(item.Key);
+        spawnAsteroids.Grid.Remove(coordinate);
+    }
+
+    private bool AsteroidChangedCell(KeyValuePair<(int, int), Asteroid> item, (int, int) newCell) => item.Key != newCell;
+
+    private void MoveAsteroidToNewCell(KeyValuePair<(int, int), Asteroid> item, (int, int) newCell)
+    {
+        Asteroid asteroidCoordinate = spawnAsteroids.Grid[item.Key];
+        spawnAsteroids.Grid.Remove(item.Key);
+        spawnAsteroids.Grid.Add(newCell, asteroidCoordinate);
     }
 }
