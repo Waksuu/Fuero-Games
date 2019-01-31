@@ -7,10 +7,11 @@ using UnityEngine;
 
 namespace Assets.Model
 {
-    public struct AsteroidCoordinate
+    public struct Asteroid
     {
         public Vector3 Position { get; set; }
         public Vector3 NewPosition { get; set; }
+        public float Radius { get; set; }
         public Quaternion Rotation { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class SpawnAsteroids : MonoBehaviour
 {
-    private const float _doubleRadius = 1.6f;
+    private const float _radius = 0.8f;
 
     [SerializeField]
     private Tilemap tilemap;
@@ -24,17 +24,17 @@ public class SpawnAsteroids : MonoBehaviour
     [SerializeField]
     private int seed = 1;
 
-    private Dictionary<(int, int), AsteroidCoordinate> grid = new Dictionary<(int, int), AsteroidCoordinate>();
+    private Dictionary<(int, int), Asteroid> grid = new Dictionary<(int, int), Asteroid>();
 
-    private float tilemapCellSizeX;
-    private float tilemapCellSizeY;
-    private Vector3 cameraSize;
+    //private float tilemapCellSizeX;
+    //private float tilemapCellSizeY;
+    //private Vector3 cameraSize;
 
     private void Start()
     {
-        tilemapCellSizeX = tilemap.cellSize.x;
-        tilemapCellSizeY = tilemap.cellSize.y;
-        cameraSize = Camera.main.ViewportToWorldPoint(new Vector3(1, 1)) * 2;
+        //tilemapCellSizeX = tilemap.cellSize.x;
+        //tilemapCellSizeY = tilemap.cellSize.y;
+        //cameraSize = Camera.main.ViewportToWorldPoint(new Vector3(1, 1)) * 2;
 
         InitializeGameWithSeed(seed);
         GenerateAsteroidsOnTilemap(width, height, tilemap, asteroid);
@@ -42,11 +42,11 @@ public class SpawnAsteroids : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var cameraPosition = Camera.main.gameObject.transform.position;
-        Rect cameraFoV = new Rect(cameraPosition - (cameraSize* 0.5f), cameraSize);
+        //var cameraPosition = Camera.main.gameObject.transform.position;
+        //Rect cameraFoV = new Rect(cameraPosition - (cameraSize * 0.5f), cameraSize);
 
         // I know coping grid is super slow
-        Dictionary<(int, int), AsteroidCoordinate> gridCopy = new Dictionary<(int, int), AsteroidCoordinate>(grid);
+        Dictionary<(int, int), Asteroid> gridCopy = new Dictionary<(int, int), Asteroid>(grid);
         foreach (var item in gridCopy)
         {
             UpdateCoordinates(item);
@@ -75,18 +75,18 @@ public class SpawnAsteroids : MonoBehaviour
             if (item.Key.Item1 != newCellX || item.Key.Item2 != newCellY)
             {
                 //Move asteroid to new cell
-                AsteroidCoordinate asteroidCoordinate = grid[item.Key];
+                Asteroid asteroidCoordinate = grid[item.Key];
                 grid.Remove(item.Key);
                 grid.Add((newCellX, newCellY), asteroidCoordinate);
             }
 
-            //It does not work as intended, also i would have to "cache" asteroids that are on screen 
-            ///and put them back into grid when they will be no longer visible
-            if (cameraFoV.Contains(item.Value.NewPosition))
-            {
-                Instantiate(asteroid, item.Value.NewPosition, item.Value.Rotation);
-                grid.Remove((newCellX, newCellY));
-            }
+            ////It does not work as intended, also i would have to "cache" asteroids that are on screen
+            /////and put them back into grid when they will be no longer visible
+            //if (cameraFoV.Contains(item.Value.NewPosition))
+            //{
+            //    Instantiate(asteroid, item.Value.NewPosition, item.Value.Rotation);
+            //    grid.Remove((newCellX, newCellY));
+            //}
         }
     }
 
@@ -108,8 +108,13 @@ public class SpawnAsteroids : MonoBehaviour
                 Quaternion randomRotation = CreateRandom2DRotation();
                 newPosition += randomRotation * velocity;
 
-                grid.Add(((int)centerPosition.x, (int)centerPosition.y), new AsteroidCoordinate { Position = centerPosition, NewPosition = newPosition,
-                    Rotation = randomRotation });
+                grid.Add(((int)centerPosition.x, (int)centerPosition.y), new Asteroid
+                {
+                    Position = centerPosition,
+                    NewPosition = newPosition,
+                    Radius = _radius,
+                    Rotation = randomRotation
+                });
 
                 //CreateAsteroidInCellCenter(asteroid, centerPosition);
             }
@@ -130,25 +135,33 @@ public class SpawnAsteroids : MonoBehaviour
 
     #region Update
 
-    private void UpdateCoordinates(KeyValuePair<(int, int), AsteroidCoordinate> item)
+    private void UpdateCoordinates(KeyValuePair<(int, int), Asteroid> item)
     {
         Vector3 position = item.Value.Position;
 
         Vector3 positionUpdate = item.Value.NewPosition;
         Vector3 newPositionUpdate = positionUpdate * 2 - position;
 
-        grid[item.Key] = new AsteroidCoordinate { Position = positionUpdate, NewPosition = newPositionUpdate };
+        grid[item.Key] = new Asteroid
+        {
+            Position = positionUpdate,
+            NewPosition = newPositionUpdate,
+            Radius = item.Value.Radius,
+            Rotation = item.Value.Rotation,
+        };
     }
 
-    private bool HandleCollison(KeyValuePair<(int, int), AsteroidCoordinate> item, (int, int) coordinate)
+    private bool HandleCollison(KeyValuePair<(int, int), Asteroid> item, (int, int) coordinate)
     {
         if (!grid.ContainsKey(coordinate))
         {
             return false;
         }
 
-        AsteroidCoordinate rightAsteroid = grid[coordinate];
-        if (Vector2.Distance(item.Value.NewPosition, rightAsteroid.Position) <= _doubleRadius)
+        Asteroid rightAsteroid = grid[coordinate];
+
+        if (Mathf.Pow(rightAsteroid.Position.x - item.Value.NewPosition.x, 2) + Mathf.Pow(rightAsteroid.Position.y - item.Value.NewPosition.y, 2)
+            <= Mathf.Pow(rightAsteroid.Radius + item.Value.Radius, 2))
         {
             grid.Remove(item.Key);
             grid.Remove(coordinate);
