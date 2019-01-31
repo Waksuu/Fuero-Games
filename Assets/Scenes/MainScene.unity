@@ -758,9 +758,11 @@ MonoBehaviour:
   tilemap: {fileID: 1222455538}
   asteroid: {fileID: 8010553388576592305, guid: 5493ca8fb08399348adc606af2309cb3,
     type: 3}
-  width: 160
-  height: 160
+  width: 10
+  height: 10
   seed: 1
+  minSpeed: 0.1
+  maxSpeed: 0.2
 --- !u!1 &1595503994
 GameObject:
   m_ObjectHideFlags: 0
